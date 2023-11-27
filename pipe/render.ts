@@ -1,6 +1,5 @@
 import {renderMedia, selectComposition} from '@remotion/renderer';
 import {v4} from 'uuid';
-import {ProgressBar} from '@opentf/cli-pbar';
 import {outputType} from './pipe';
 import {spawn} from 'child_process';
 import path from 'path';
@@ -31,7 +30,7 @@ const renderVideo = async (
 	outputType: outputType
 ) => {
 	try {
-		const ID = v4(); // unique video id
+		const ID = v4(); // Unique video id
 		const compositionId = 'quran';
 
 		// Composition props
@@ -53,9 +52,6 @@ const renderVideo = async (
 		});
 
 		// Rendering progress bar init
-		const multiBar = new ProgressBar();
-		multiBar.start();
-		const renderingProgresss = multiBar.add({total: 100, color: 'blue'});
 
 		// Rendering Composition (mostly takes a while)
 		await renderMedia({
@@ -70,9 +66,9 @@ const renderVideo = async (
 				console.log(log);
 			},
 			logLevel: 'verbose',
-			// concurrency: 8,
+			// Concurrency: 8,
 			onProgress: ({progress, encodedFrames, renderedFrames}) => {
-				// renderingProgresss?.update({value: progress * 100});
+				// RenderingProgresss?.update({value: progress * 100});
 				console.log(
 					'Rendering Porgress:',
 					renderedFrames,
@@ -85,11 +81,11 @@ const renderVideo = async (
 			},
 			onDownload: (src) => {
 				console.log(`\nDownloading ${src} ...`);
-				// const downloadProgress = multiBar.add({total: 100});
+				// Const downloadProgress = multiBar.add({total: 100});
 				return ({percent, downloaded, totalSize}) => {
 					if (percent !== null) {
 						console.log('Downloading Porgress:', percent * 100);
-						// downloadProgress?.update({value: percent * 100});
+						// DownloadProgress?.update({value: percent * 100});
 
 						// const query = spawn('ls', [path.join(__dirname, '../out')]);
 						// query.stdout.on('data', (data: {toString: () => string}) => {
