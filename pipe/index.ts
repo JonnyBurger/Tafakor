@@ -31,13 +31,13 @@ const s3 = new S3Client({
 });
 
 (async () => {
-	// remotion bundle location
+	// Remotion bundle location
 	const bundleLocation = await bundle({
-		entryPoint: path.join(__dirname, '../src/index.ts'),
+		entryPoint: path.join(process.cwd(), 'src/index.ts'),
 		webpackOverride: (config) => config,
 	});
 
-	// fetching a verse
+	// Fetching a verse
 	const verse: Verse = await getVerse({
 		surah: props.surah ? Number(props.surah) : undefined,
 		from: props.from ? Number(props.from) : undefined,
@@ -46,8 +46,8 @@ const s3 = new S3Client({
 
 	console.log(verse.duration);
 
-	// verse data extraction
-	const surah = verse.surah;
+	// Verse data extraction
+	const {surah} = verse;
 	const verses = [...Array(verse.to - verse.from + 1)].map(
 		(e, i) => verse.from + i
 	);
@@ -58,7 +58,7 @@ const s3 = new S3Client({
 		}, duration: ${verse.duration}`
 	);
 
-	// choosing theme for the video
+	// Choosing theme for the video
 	let theme = '';
 	if (!props.video) {
 		theme = await getTheme(verse.verse);
