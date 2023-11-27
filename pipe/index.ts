@@ -9,11 +9,12 @@ import {getTheme} from './theme';
 import {publishToFB} from './publish';
 import {Verse} from '../utils/types';
 import {outputType, stockProvider} from './pipe';
+import {readFileSync} from 'fs';
 
 let props: {[key: string]: string} = {};
 
 try {
-	props = require('../input-props.json');
+	props = JSON.parse(readFileSync('input-props.json', 'utf-8'));
 	if (Object.keys(props).length > 0) {
 		console.log('Input Props Detected', props);
 	}

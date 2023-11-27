@@ -35,7 +35,7 @@ jobs:
           bun-version: 1.0.8
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: "3.10"
       - name: Emit input props
         run: echo $WORKFLOW_INPUT | tee input-props.json | jq -C '.'
         env:
@@ -61,4 +61,4 @@ jobs:
       - name: Installing Chrome
         run: sudo dpkg -i google-chrome-stable_current_amd64.deb
       - name: Rendering Video
-        run: bun ./pipe
+        run: npx tsx ./pipe
