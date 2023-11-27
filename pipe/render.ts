@@ -71,9 +71,17 @@ const renderVideo = async (
 			},
 			logLevel: 'verbose',
 			// concurrency: 8,
-			onProgress: ({progress}) => {
+			onProgress: ({progress, encodedFrames, renderedFrames}) => {
 				// renderingProgresss?.update({value: progress * 100});
-				console.log('Rendering Porgress:', progress * 100);
+				console.log(
+					'Rendering Porgress:',
+					renderedFrames,
+					encodedFrames,
+					progress * 100
+				);
+			},
+			onStart: ({frameCount}) => {
+				console.log('Total frames', frameCount);
 			},
 			onDownload: (src) => {
 				console.log(`\nDownloading ${src} ...`);
